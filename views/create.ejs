@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  <div style="max-width: 550px; margin: 0 auto;">
+    
+    <h1 class="page-title">Create a Post</h1>
+    <p class="page-subtitle">Share what is on your mind with the Connectify community.</p>
+
+    <!-- Error message if validation fails -->
+    <% if (errorMessage) { %>
+      <div class="alert alert-danger">
+        <%= errorMessage %>
+      </div>
+    <% } %>
+
+    <div class="auth-card" style="max-width: 100%; padding: 2rem;">
+      <form action="/posts/create" method="POST">
+        <!-- Post content text area -->
+        <div class="form-group">
+          <label for="postText" class="form-label">Write your post</label>
+          <textarea 
+            id="postText" 
+            name="postText" 
+            class="form-control" 
+            placeholder="What's happening?" 
+            maxlength="500"
+            required
+            autofocus
+          ></textarea>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <!-- Cancel Button -->
+          <a href="/feed" class="btn btn-secondary" style="width: 50%;">Cancel</a>
+          <!-- Submit Button -->
+          <button type="submit" class="btn" style="width: 50%;">Publish Post</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<%- include('partials/footer') %>

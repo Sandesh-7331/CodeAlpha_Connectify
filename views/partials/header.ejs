@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connectify | Mini Social App</title>
+  <!-- Link to the clean custom stylesheet in the public folder -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  
+  <!-- Main top navigation bar -->
+  <header class="navbar">
+    <!-- Clickable logo redirects to feed -->
+    <a href="/feed" class="nav-brand">
+      <span class="brand-dot"></span>Connectify
+    </a>
+    
+    <nav class="nav-links">
+      <% // Check if currentUser exists in local variables (passed from route) %>
+      <% if (locals.currentUser && currentUser.id) { %>
+        <!-- Authenticated layout links -->
+        <span class="nav-link" style="cursor: default;">
+          Hello, <strong><%= currentUser.username %></strong>
+        </span>
+        <a href="/feed" class="nav-link">Feed</a>
+        <a href="/posts/create" class="nav-btn">New Post</a>
+        <a href="/logout" class="nav-btn-outline">Log Out</a>
+      <% } else { %>
+        <!-- Guest layout links -->
+        <a href="/login" class="nav-link">Login</a>
+        <a href="/register" class="nav-btn">Sign Up</a>
+      <% } %>
+    </nav>
+  </header>

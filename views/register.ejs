@@ -1,0 +1,84 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Create Account</h2>
+        <p>Join Connectify today</p>
+      </div>
+
+      <!-- Display error notification if one exists -->
+      <% if (errorMessage) { %>
+        <div class="alert alert-danger">
+          <%= errorMessage %>
+        </div>
+      <% } %>
+
+      <form action="/register" method="POST">
+        <!-- Username Field -->
+        <div class="form-group">
+          <label for="username" class="form-label">Username</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            class="form-control" 
+            placeholder="Choose a username"
+            required
+            minlength="3"
+          >
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            class="form-control" 
+            placeholder="name@example.com"
+            required
+          >
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            class="form-control" 
+            placeholder="At least 6 characters"
+            required
+            minlength="6"
+          >
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            name="confirmPassword" 
+            class="form-control" 
+            placeholder="Repeat password"
+            required
+          >
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn">Register</button>
+      </form>
+
+      <div class="auth-footer-text">
+        Already have an account? <a href="/login">Log In</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

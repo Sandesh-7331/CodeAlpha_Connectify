@@ -1,0 +1,78 @@
+<%- include('partials/header') %>
+
+<div class="container">
+  
+  <!-- Feed header, shows page title and action button -->
+  <div class="feed-header">
+    <div>
+      <h1 class="page-title">Community Feed</h1>
+      <p class="page-subtitle" style="margin-bottom: 0;">Stay updated with everyone's latest thoughts.</p>
+    </div>
+    <a href="/posts/create" class="nav-btn" style="text-decoration: none;">+ Share Post</a>
+  </div>
+
+  <div class="feed-container">
+    <% if (posts && posts.length > 0) { %>
+      <!-- Loop through each post object inside the feed -->
+      <% posts.forEach(post => { %>
+        <div class="post-card">
+          
+          <!-- Post Author avatar and timestamp metadata -->
+          <div class="post-meta">
+            <div class="post-author">
+              <div class="author-avatar">
+                <!-- Displays the first letter of the author's username -->
+                <%= post.author.username.charAt(0) %>
+              </div>
+              <span><%= post.author.username %></span>
+            </div>
+            <div class="post-date">
+              <!-- Formats post timestamp cleanly using standard client JS toLocaleString -->
+              <%= new Date(post.createdAt).toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit' 
+              }) %>
+            </div>
+          </div>
+
+          <!-- Post Main Text Content -->
+          <div class="post-content"><%= post.content %></div>
+
+          <!-- Interactive Action Section -->
+          <div class="post-actions">
+            <% // Check if current user has already liked this post %>
+            <% // We convert each ObjectId to string because session userId is a plain string %>
+            <% const userLiked = post.likedBy.some(id => id.toString() === String(currentUser.id)); %>
+            
+            <button 
+              class="like-btn <%= userLiked ? 'liked' : '' %>" 
+              data-post-id="<%= post._id %>"
+            >
+              <!-- Filled heart for liked state, outline heart for unliked state -->
+              <span class="like-icon"><%= userLiked ? '♥' : '♡' %></span>
+              <span class="like-count"><%= post.likedBy.length %></span> Likes
+            </button>
+          </div>
+
+        </div>
+      <% }) %>
+    <% } else { %>
+      <!-- Fallback when no posts exist in database -->
+      <div class="no-posts">
+        <span class="no-posts-icon">📣</span>
+        <h3>No posts on the feed yet</h3>
+        <p style="color: var(--text-dim); margin-top: 0.5rem; margin-bottom: 1.5rem;">
+          Be the first person to share a thought with the community!
+        </p>
+        <a href="/posts/create" class="nav-btn" style="text-decoration: none; display: inline-block; width: auto;">
+          Create First Post
+        </a>
+      </div>
+    <% } %>
+  </div>
+
+</div>
+
+<%- include('partials/footer') %>
