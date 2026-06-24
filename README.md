@@ -211,3 +211,5 @@ After running `npm run seed`, use these to log in instantly:
 - **Sessions vs JWT** — Sessions are server-side, safer for EJS apps; JWT is for SPAs
 - **AJAX Likes** — `fetch('/posts/:id/like', {method:'POST'})` → JSON → DOM update
 - **Route Guards** — `ensureAuthenticated` middleware runs before every protected route
+#   C o d e A l p h a _ C o n n e c t i f y  
+ 
