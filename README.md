@@ -1,8 +1,8 @@
 # 🌐 Connectify - Mini Social Media Platform
 
-> Connectify is a full-stack social media web application built with Node.js, Express.js, EJS, and MongoDB. This internship project demonstrates core web development practices including user authentication, session management, server-side rendering, and real-time UI interactions.
+Connectify is a full-stack social media web application built with Node.js, Express.js, EJS, and MongoDB. This internship project demonstrates core web development practices including user authentication, session management, server-side rendering, and real-time UI interactions.
 
-> This application allows users to register an account, log in securely, view a community feed of posts, create their own posts, and like or unlike posts dynamically without page reloads.
+This application allows users to register an account, log in securely, view a community feed of posts, create their own posts, and like or unlike posts dynamically without page reloads.
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)
@@ -173,43 +173,5 @@ After running `npm run seed`, use these to log in instantly:
 
 ---
 
-## 🔗 Application Routes
 
-| Method | Route               | Description                        | Auth Required |
-|--------|---------------------|------------------------------------|---------------|
-| GET    | `/`                 | Redirects to `/feed`               | No            |
-| GET    | `/register`         | Show registration form             | No            |
-| POST   | `/register`         | Submit registration                | No            |
-| GET    | `/login`            | Show login form                    | No            |
-| POST   | `/login`            | Submit login credentials           | No            |
-| GET    | `/logout`           | Destroy session and log out        | No            |
-| GET    | `/feed`             | View community post feed           | ✅ Yes        |
-| GET    | `/posts/create`     | Show create post form              | ✅ Yes        |
-| POST   | `/posts/create`     | Submit new post                    | ✅ Yes        |
-| POST   | `/posts/:id/like`   | Toggle like on a post (JSON API)   | ✅ Yes        |
-
----
-
-## 🎓 Viva / Interview Reference
-
-### How data flows in this app:
-```
-[ Browser ]  →  POST /login  →  [ Express Controller ]  →  [ MongoDB ]
-                                        ↓
-                              Session created (userId stored)
-                                        ↓
-[ Browser ]  →  GET /feed   →  [ Auth Middleware ]  →  [ Post Controller ]
-                                                               ↓
-                                                    Fetch posts + populate authors
-                                                               ↓
-                                                     Render feed.ejs with data
-```
-
-### Key concepts to explain:
-- **MVC Pattern** — Models, Views, and Controllers each have one clear responsibility
-- **bcrypt hashing** — `genSalt(10)` + `hash()` on register; `compare()` on login
-- **Sessions vs JWT** — Sessions are server-side, safer for EJS apps; JWT is for SPAs
-- **AJAX Likes** — `fetch('/posts/:id/like', {method:'POST'})` → JSON → DOM update
 - **Route Guards** — `ensureAuthenticated` middleware runs before every protected route
-#   C o d e A l p h a _ C o n n e c t i f y  
- 
